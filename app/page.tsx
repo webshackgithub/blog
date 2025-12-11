@@ -3,9 +3,11 @@ import { BlogCard } from "@/components/BlogCard";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 
+import { CTA } from "@/components/CTA"; // Import CTA
+
 export default function Home() {
   return (
-    <main className="container mx-auto py-10 px-4">
+    <main className="container mx-auto py-10 px-4 space-y-16">
       <section className="mb-12 text-center">
         <h1 className="text-4xl font-extrabold tracking-tight lg:text-5xl mb-4">
           Tech Blog
@@ -63,6 +65,11 @@ export default function Home() {
           href="#"
         />
       </div>
+
+      {/* CTA Section */}
+      <section className="mt-16">
+        <CTA />
+      </section>
     </main>
   );
 }
