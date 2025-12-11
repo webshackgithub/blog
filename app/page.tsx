@@ -1,65 +1,68 @@
-import Image from "next/image";
+
+import { BlogCard } from "@/components/BlogCard";
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
 
 export default function Home() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
+    <main className="container mx-auto py-10 px-4">
+      <section className="mb-12 text-center">
+        <h1 className="text-4xl font-extrabold tracking-tight lg:text-5xl mb-4">
+          Tech Blog
+        </h1>
+        <p className="text-xl text-muted-foreground mb-4">
+          최신 기술 트렌드와 개발 경험을 공유합니다.
+        </p>
+        <Button variant="outline" asChild>
+          <Link href="/components-demo">컴포넌트 데모 보기</Link>
+        </Button>
+      </section>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {/* Case 1: 기본 카드 */}
+        <BlogCard
+          title="Next.js 14의 새로운 기능 탐구: Server Actions와 Partial Prerendering"
+          summary="Next.js 14는 웹 개발의 패러다임을 바꾸는 혁신적인 기능들을 대거 도입했습니다. Server Actions를 통한 간편한 데이터 변이와 사용자 경험을 극대화하는 Partial Prerendering에 대해 깊이 있게 알아봅니다."
+          tags={["Next.js", "React", "Web Dev"]}
+          publishedAt="2024-03-15"
+          readTime="5"
+          thumbnailUrl="https://images.unsplash.com/photo-1633356122544-f134324a6cee?q=80&w=2070&auto=format&fit=crop"
+          href="#"
         />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
+
+        {/* Case 2: 긴 제목 테스트 */}
+        <BlogCard
+          title="효과적인 상태 관리를 위한 Zustand 완벽 가이드: Redux, Recoil과의 비교 및 실전 적용 사례 분석"
+          summary="상태 관리는 프론트엔드 개발의 핵심입니다. Zustand는 가볍고 직관적인 API로 인기를 얻고 있습니다. 다른 라이브러리와의 장단점 비교를 통해 프로젝트에 적합한 도구를 선택하는 방법을 알아봅니다."
+          tags={["State Management", "Zustand", "Frontend"]}
+          publishedAt="2024-03-12"
+          readTime="12"
+          thumbnailUrl="https://images.unsplash.com/photo-1618477247222-ac59124545da?q=80&w=2072&auto=format&fit=crop"
+          href="#"
+        />
+
+        {/* Case 3: 짧은 내용 테스트 */}
+        <BlogCard
+          title="TypeScript 5.0 업데이트"
+          summary="Decorators 표준화와 성능 개선이 포함된 TypeScript 5.0의 주요 변경 사항을 빠르게 훑어봅니다."
+          tags={["TypeScript"]}
+          publishedAt="2024-03-10"
+          readTime="3"
+          thumbnailUrl="https://images.unsplash.com/photo-1587620962725-abab7fe55159?q=80&w=2031&auto=format&fit=crop"
+          href="#"
+        />
+
+        {/* Case 4: 추가 데이터 */}
+        <BlogCard
+          title="모던 CSS의 미래: Tailwind CSS v4 살펴보기"
+          summary="Tailwind CSS v4는 성능 향상과 새로운 기능을 제공합니다. 기존 버전과의 차이점과 마이그레이션 가이드를 소개합니다."
+          tags={["CSS", "Tailwind", "Design"]}
+          publishedAt="2024-03-08"
+          readTime="7"
+          thumbnailUrl="https://images.unsplash.com/photo-1507721999472-8ed4421c4af2?q=80&w=2070&auto=format&fit=crop"
+          href="#"
+        />
+      </div>
+    </main>
   );
 }

@@ -2,52 +2,75 @@
 
 ## 1. 프로젝트 개요
 - **프로젝트 이름**: blog
-- **목적**: Next.js 기반의 블로그 애플리케이션 구축
-- **현재 단계**: 초기 설정 (Initial Setup) 단계
+- **목적**: Next.js 기반의 테크 블로그 애플리케이션 구축
+- **현재 단계**: UI 구현 및 기능 개발 단계
 - **주요 프레임워크**: Next.js 16.0.8 (App Router 사용)
 
 ## 2. 기술 스택 (Tech Stack)
 ### Core
-- **Framework**: Next.js 16.0.8
+- **Framework**: Next.js 16.0.8 (Turbopack 활용)
 - **Library**: React 19.2.1, React DOM 19.2.1
 - **Language**: TypeScript 5
 
-### Styling
-- **CSS Framework**: Tailwind CSS v4 (최신 버전 사용)
-- **Utilities**: 
-  - `clsx`: 조건부 클래스 결합
-  - `tailwind-merge`: Tailwind 클래스 충돌 해결
-  - `class-variance-authority`: 컴포넌트 변형(Variant) 관리
-
-### Tools & Configuration
-- **Linting**: ESLint 9 (Flat Config 호환)
-- **Icons**: `lucide-react` (아이콘 라이브러리)
+### Styling & UI
+- **CSS Framework**: Tailwind CSS v4
+- **Component Library**: Shadcn UI (Radix UI 기반)
+- **Icons**: `lucide-react`
 - **Animation**: `tw-animate-css`
 
-## 3. 디렉토리 구조 분석
-- **`/app`**: Next.js App Router의 핵심 디렉토리로, 라우팅과 페이지 로직을 담당합니다.
-  - `page.tsx`: 현재 기본 템플릿 코드가 포함된 메인 페이지입니다.
-  - `layout.tsx`: 애플리케이션의 루트 레이아웃을 정의합니다.
-  - `globals.css`: Tailwind CSS v4 설정 및 전역 스타일이 포함되어 있습니다.
-- **`/lib`**: 프로젝트 전반에서 사용되는 유틸리티 함수들을 모아두는 곳입니다.
-  - `utils.ts`: `cn` 함수(clsx + tailwind-merge) 등 헬퍼 함수가 위치합니다.
-- **`/public`**: 이미지, 폰트 등 정적 에셋을 저장하는 디렉토리입니다.
-- **Root Configuration Files**:
-  - `next.config.ts`: Next.js 관련 설정.
-  - `tsconfig.json`: TypeScript 컴파일러 설정 (Strict 모드, Path Alias `@/*` 설정됨).
-  - `package.json`: 의존성 및 스크립트 정의.
+### AI & Tools
+- **MCP**: Shadcn UI MCP Server (`.cursor/mcp.json` 설정 완료)
+- **Editor**: Cursor (MCP 연동)
 
-## 4. 코드 분석 (초기 상태)
-- **`app/page.tsx`**: 현재 Next.js의 기본 "Get Started" 템플릿이 적용되어 있습니다. 블로그 레이아웃으로 전면 수정이 필요합니다.
-- **`app/globals.css`**: Tailwind v4를 위한 기본 설정이 되어 있을 것으로 추정됩니다.
-- **의존성 특징**: `lucide-react`가 이미 설치되어 있어 UI 개발 시 아이콘 사용이 용이하며, `tailwind-merge`와 `clsx` 조합은 Shadcn UI와 같은 모던 컴포넌트 패턴을 따를 준비가 되어 있음을 시사합니다.
+### 필수 기억 요소
+   
+- 컴포넌트를 만들땐 항상 shadcn mcp를 사용해줘.
+- UI를 만들때 테마를 하드코딩 하지 말고 공통 테마를 사용해줘.
+- 컴포넌트를 만들고 나면 /components-demo 페이지에 데모 디스플레이 해줘.
+- **Rule**: `components` 폴더에 공통 컴포넌트들이 존재하므로, 페이지를 만들 때는 반드시 이 공통 컴포넌트들을 재사용해야 한다. 중복 구현을 피할 것.
 
-## 5. 향후 개발 제안
-1.  **초기화**: `app/page.tsx`의 기본 템플릿 코드를 제거하고 블로그 메인 페이지 구조로 변경.
-2.  **구조화**: 
-    - `components/ui`: 공통 UI 컴포넌트 (버튼, 카드 등).
-    - `components/layout`: 헤더, 푸터, 사이드바 등 레이아웃 컴포넌트.
-    - `app/blog`: 블로그 포스트 상세 페이지 및 리스트 페이지 라우팅.
-3.  **기능 구현**:
-    - 블로그 포스트 데이터 소스 결정 (MDX, CMS, 데이터베이스 등).
-    - 다크 모드/라이트 모드 토글 (Tailwind v4 `dark:` 클래스 활용).
+## 3. 디렉토리 구조 분석 (최신)
+- **`/app`**: 
+  - `page.tsx`: 블로그 메인 페이지 (BlogCard 그리드 레이아웃 적용).
+  - `components-demo/`: 컴포넌트 테스트 및 데모용 페이지.
+  - `globals.css`: Tailwind v4 Theme 및 Shadcn UI 필수 CSS 변수 포함.
+- **`/components`**:
+  - `BlogCard.tsx`: 블로그 포스트 카드 컴포넌트 (Shadcn UI 기반).
+  - **`/ui`**: Shadcn UI 공통 컴포넌트 라이브러리.
+    - `card.tsx`: 카드 컨테이너.
+    - `badge.tsx`: 태그 및 라벨.
+    - `button.tsx`: 버튼 요소.
+- **`/prompts`**: AI 프롬프트 템플릿 저장소 (`blog-card.md` 등).
+- **Configuration**:
+  - `.cursor/mcp.json`: Shadcn MCP 서버 설정 파일.
+  - `next.config.ts`: 이미지 도메인(`images.unsplash.com`) 허용 설정 추가.
+
+## 4. 주요 구현 내역
+1.  **Shadcn MCP 설정**:
+    - 프로젝트 레벨에서 Cursor 에디터 연동 설정 (`.cursor/mcp.json`) 완료.
+    - AI가 컴포넌트 코드를 직접 조회하여 생성하도록 구성.
+2.  **UI 컴포넌트 시스템 구축**:
+    - `components/ui` 디렉토리 신설.
+    - MCP를 통해 `Card`, `Badge`, `Button` 컴포넌트 정석 구현 (`@radix-ui/react-slot` 사용).
+3.  **BlogCard 컴포넌트**:
+    - 썸네일, 제목, 요약, 태그, 메타 정보(날짜/시간), CTA 버튼을 포함한 반응형 카드 구현.
+    - 공통 테마 변수(`bg-card`, `text-primary` 등)를 사용하여 다크 모드 등 일관된 스타일링 보장.
+4.  **메인 페이지 개편**:
+    - 기본 템플릿 제거 후 BlogCard 그리드 레이아웃 적용.
+    - 데모 데이터를 활용한 UI 시연 및 반응형 디자인 적용.
+
+## 5. 반응형 웹 구성 전략 (Responsive Design)
+- **Mobile First Approach**: 모바일 화면을 기본으로 설계하고, 더 큰 화면(`md`, `lg` 등)에 대한 스타일을 추가하는 방식 채택.
+- **Tailwind Breakpoints 전략**:
+  - `Base`: 모바일 (1열 그리드, 폰트 사이즈 조정)
+  - `md` (768px): 태블릿 (2열 그리드, 패딩 증가)
+  - `lg` (1024px): 데스크탑 (3열 그리드, 최대 너비 제한)
+- **구현 예시 (BlogCard Grid)**:
+  ```tsx
+  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+  ```
+
+## 6. 향후 개발 제안
+1.  **레이아웃 구조화**: `components/layout` (Header, Footer) 생성 및 `app/layout.tsx` 적용.
+2.  **포스트 상세 페이지**: 동적 라우팅(`app/posts/[slug]`) 및 MDX/CMS 연동.
+3.  **테마 토글**: 다크/라이트 모드 전환 기능 추가.
