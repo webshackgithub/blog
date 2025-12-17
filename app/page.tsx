@@ -1,24 +1,20 @@
 
 import { BlogCard } from "@/components/BlogCard";
-import Link from "next/link";
-import { Button } from "@/components/ui/button";
+import { Hero } from "@/components/Hero";
 
 import { CTA } from "@/components/CTA"; // Import CTA
 
 export default function Home() {
   return (
     <main className="container mx-auto py-10 px-4 space-y-16">
-      <section className="mb-12 text-center">
-        <h1 className="text-4xl font-extrabold tracking-tight lg:text-5xl mb-4">
-          Tech Blog
-        </h1>
-        <p className="text-xl text-muted-foreground mb-4">
-          최신 기술 트렌드와 개발 경험을 공유합니다.
-        </p>
-        <Button variant="outline" asChild>
-          <Link href="/components-demo">컴포넌트 데모 보기</Link>
-        </Button>
-      </section>
+      <Hero
+        title="Tech Blog"
+        subtitle="최신 기술 트렌드와 개발 경험을 공유합니다."
+        ctaText="컴포넌트 데모 보기"
+        ctaLink="/components-demo"
+        backgroundImage="https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=2070&auto=format&fit=crop"
+        className="mb-12"
+      />
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {/* Case 1: 기본 카드 */}

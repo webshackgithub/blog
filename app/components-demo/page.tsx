@@ -1,14 +1,36 @@
 import { BlogCard } from "@/components/BlogCard";
 import { Hero } from "@/components/Hero";
 import { CTA } from "@/components/CTA";
+import { Header } from "@/components/Header";
+import { Footer } from "@/components/Footer";
 
 export default function ComponentsDemoPage() {
     return (
         <div className="container mx-auto py-10 px-4 space-y-16">
             <h1 className="text-4xl font-bold mb-8">Component Demo</h1>
 
+            {/* Header Section Demo */}
+            <section>
+                <h2 className="text-2xl font-semibold mb-6">Header Component</h2>
+                <div className="border rounded-xl overflow-hidden shadow-sm bg-gray-50 dark:bg-slate-900">
+                    <Header />
+                    <div className="p-10 text-center text-muted-foreground">
+                        (헤더 아래 컨텐츠 영역 예시)
+                    </div>
+                </div>
+            </section>
+
+            {/* Footer Section Demo */}
+            <section>
+                <h2 className="text-2xl font-semibold mb-6">Footer Component</h2>
+                <div className="border rounded-xl overflow-hidden shadow-sm">
+                    <Footer />
+                </div>
+            </section>
+
             {/* Hero Section Demo */}
             <section>
+
                 <h2 className="text-2xl font-semibold mb-6">Hero Component</h2>
                 <div className="border rounded-xl overflow-hidden shadow-sm">
                     <Hero
