@@ -3,6 +3,13 @@ import { Hero } from "@/components/Hero";
 import { CTA } from "@/components/CTA";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
+import {
+    Carousel,
+    CarouselContent,
+    CarouselItem,
+    CarouselNext,
+    CarouselPrevious,
+} from "@/components/ui/carousel";
 
 export default function ComponentsDemoPage() {
     return (
@@ -12,7 +19,7 @@ export default function ComponentsDemoPage() {
             {/* Header Section Demo */}
             <section>
                 <h2 className="text-2xl font-semibold mb-6">Header Component</h2>
-                <div className="border rounded-xl overflow-hidden shadow-sm bg-gray-50 dark:bg-slate-900">
+                <div className="border rounded-xl overflow-hidden shadow-sm bg-muted">
                     <Header />
                     <div className="p-10 text-center text-muted-foreground">
                         (헤더 아래 컨텐츠 영역 예시)
@@ -36,7 +43,7 @@ export default function ComponentsDemoPage() {
                     <Hero
                         title="기술의 미래를 탐험하다"
                         subtitle="최신 개발 트렌드, 심도 있는 튜토리얼, 그리고 영감을 주는 이야기를 만나보세요."
-                        backgroundImage="https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=2070&auto=format&fit=crop"
+                        backgroundImage="/assets/Gemini_Generated_Image_1ve5g01ve5g01ve5.png"
                         ctaLink="#"
                     />
                 </div>
@@ -61,7 +68,7 @@ export default function ComponentsDemoPage() {
                         tags={["Next.js", "React", "Web Dev"]}
                         publishedAt="2024-03-15"
                         readTime="5"
-                        thumbnailUrl="https://images.unsplash.com/photo-1633356122544-f134324a6cee?q=80&w=2070&auto=format&fit=crop"
+                        thumbnailUrl="/assets/Gemini_Generated_Image_4i4c9k4i4c9k4i4c%20(1).png"
                         href="#"
                     />
 
@@ -72,7 +79,7 @@ export default function ComponentsDemoPage() {
                         tags={["State Management", "Zustand", "Frontend"]}
                         publishedAt="2024-03-12"
                         readTime="12"
-                        thumbnailUrl="https://images.unsplash.com/photo-1555099962-4199c345e5dd?q=80&w=2075&auto=format&fit=crop"
+                        thumbnailUrl="/assets/Gemini_Generated_Image_4i4c9k4i4c9k4i4c%20(2).png"
                         href="#"
                     />
 
@@ -83,9 +90,49 @@ export default function ComponentsDemoPage() {
                         tags={["TypeScript"]}
                         publishedAt="2024-03-10"
                         readTime="3"
-                        thumbnailUrl="https://images.unsplash.com/photo-1587620962725-abab7fe55159?q=80&w=2031&auto=format&fit=crop"
+                        thumbnailUrl="/assets/Gemini_Generated_Image_4i4c9k4i4c9k4i4c%20(3).png"
                         href="#"
                     />
+                </div>
+            </section>
+
+            {/* Blog Card Carousel Demo */}
+            <section>
+                <h2 className="text-2xl font-semibold mb-6">Blog Card Carousel</h2>
+                <div className="w-full max-w-[calc(100%-100px)] mx-auto">
+                    <Carousel
+                        opts={{
+                            align: "start",
+                        }}
+                        className="w-full"
+                    >
+                        <CarouselContent>
+                            {[
+                                "/assets/Gemini_Generated_Image_4i4c9k4i4c9k4i4c%20(4).png",
+                                "/assets/Gemini_Generated_Image_4i4c9k4i4c9k4i4c%20(5).png",
+                                "/assets/Gemini_Generated_Image_4i4c9k4i4c9k4i4c%20(6).png",
+                                "/assets/Gemini_Generated_Image_4i4c9k4i4c9k4i4c%20(7).png",
+                                "/assets/Gemini_Generated_Image_4i4c9k4i4c9k4i4c%20(8).png",
+                                "/assets/Gemini_Generated_Image_4i4c9k4i4c9k4i4c.png"
+                            ].map((imagePath, index) => (
+                                <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3 pl-4">
+                                    <div className="h-full py-2">
+                                        <BlogCard
+                                            title={`Carousel Item ${index + 1}: Next.js 14 Update`}
+                                            summary={`This is a summary for item ${index + 1}. Shadcn UI carousel component makes it easy to build swipable interfaces.`}
+                                            tags={["Next.js", "Carousel", "Demo"]}
+                                            publishedAt={`2024-03-${10 + index}`}
+                                            readTime={`${3 + index}`}
+                                            thumbnailUrl={imagePath}
+                                            href="#"
+                                        />
+                                    </div>
+                                </CarouselItem>
+                            ))}
+                        </CarouselContent>
+                        <CarouselPrevious />
+                        <CarouselNext />
+                    </Carousel>
                 </div>
             </section>
         </div>

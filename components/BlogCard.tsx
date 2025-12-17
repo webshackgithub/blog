@@ -33,7 +33,7 @@ export function BlogCard({
     href,
 }: BlogCardProps) {
     return (
-        <Card className="overflow-hidden flex flex-col h-full hover:shadow-md transition-shadow">
+        <Card className="overflow-hidden flex flex-col h-full hover:shadow-md transition-shadow py-0 gap-0">
             <CardHeader className="p-0">
                 <div className="relative w-full aspect-video">
                     <Image
