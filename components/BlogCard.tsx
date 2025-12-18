@@ -13,7 +13,7 @@ import {
 } from "@/components/ui/card";
 import { Clock, Calendar } from "lucide-react";
 
-interface BlogCardProps {
+export interface BlogCardProps {
     title: string;
     summary: string;
     tags: string[];

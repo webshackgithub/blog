@@ -6,10 +6,10 @@ import { Github, Youtube, Facebook, Instagram, Mail } from "lucide-react";
 export function Footer() {
     return (
         <footer className="border-t bg-background">
-            <div className="container px-4 py-12 md:py-16">
-                <div className="grid grid-cols-1 gap-8 md:grid-cols-4 lg:grid-cols-5">
-                    {/* Brand & Contact */}
-                    <div className="md:col-span-2">
+            <div className="px-4 py-12 md:py-16">
+                <div className="grid grid-cols-1 gap-8 md:grid-cols-3 lg:grid-cols-4 justify-between">
+                    {/* Brand & Contact (Left weight) */}
+                    <div className="lg:col-span-1">
                         <Link href="/" className="flex items-center space-x-2">
                             <span className="text-xl font-bold tracking-tight">코드팩토리</span>
                         </Link>
@@ -45,8 +45,8 @@ export function Footer() {
                         </div>
                     </div>
 
-                    {/* Navigation */}
-                    <div>
+                    {/* Navigation (Center-left) */}
+                    <div className="lg:justify-self-center">
                         <h3 className="mb-4 text-sm font-semibold">빠른 이동</h3>
                         <ul className="space-y-3 text-sm text-muted-foreground">
                             <li>
@@ -67,8 +67,8 @@ export function Footer() {
                         </ul>
                     </div>
 
-                    {/* Legal/Info */}
-                    <div>
+                    {/* Legal/Info (Center-right) */}
+                    <div className="lg:justify-self-center">
                         <h3 className="mb-4 text-sm font-semibold">정보</h3>
                         <ul className="space-y-3 text-sm text-muted-foreground">
                             <li>
@@ -84,8 +84,8 @@ export function Footer() {
                         </ul>
                     </div>
 
-                    {/* Newsletter */}
-                    <div className="md:col-span-1 lg:col-span-1">
+                    {/* Newsletter (Right weight) */}
+                    <div className="lg:justify-self-end w-full max-w-sm">
                         <h3 className="mb-4 text-sm font-semibold">뉴스레터 구독</h3>
                         <p className="mb-4 text-sm text-muted-foreground">
                             최신 포스트를 이메일로 받아보세요.
