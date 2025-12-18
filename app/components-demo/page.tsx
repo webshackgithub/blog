@@ -10,6 +10,17 @@ import {
     CarouselNext,
     CarouselPrevious,
 } from "@/components/ui/carousel";
+import { PostHeader } from "@/components/blog/PostHeader";
+import { AuthorBio } from "@/components/blog/AuthorBio";
+import { ShareButtons } from "@/components/blog/ShareButtons";
+import { TableOfContents } from "@/components/blog/TableOfContents";
+import { PostNavigation } from "@/components/blog/PostNavigation";
+import { Badge } from "@/components/ui/badge";
+import { AdminPageHeader } from "@/components/admin/AdminPageHeader";
+import { AdminSection } from "@/components/admin/AdminSection";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Button } from "@/components/ui/button";
 
 export default function ComponentsDemoPage() {
     return (
@@ -133,6 +144,164 @@ export default function ComponentsDemoPage() {
                         <CarouselPrevious />
                         <CarouselNext />
                     </Carousel>
+                </div>
+            </section>
+
+            {/* Post Header Demo */}
+            <section>
+                <h2 className="text-2xl font-semibold mb-6">Blog Post Header Component</h2>
+                <div className="border rounded-xl p-8 bg-background">
+                    <PostHeader
+                        title="사용자 중심의 블로그 디자인: 가독성과 경험을 고려한 레이아웃"
+                        category="UX Design"
+                        publishedAt="2024-03-24"
+                        readTime="5"
+                        thumbnailUrl="/assets/Gemini_Generated_Image_1ve5g01ve5g01ve5.png"
+                    />
+                </div>
+            </section>
+
+            {/* Feature Components Grid */}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
+                {/* Author Bio Demo */}
+                <section>
+                    <h2 className="text-2xl font-semibold mb-6">Author Bio Component</h2>
+                    <AuthorBio
+                        name="김개발"
+                        role="Frontend Developer"
+                        description="사용자 경험에 집중하는 프론트엔드 개발자입니다. React와 Next.js를 주로 다루며, 읽기 좋은 코드를 작성하기 위해 노력합니다."
+                        avatarUrl="https://github.com/shadcn.png"
+                        socials={{
+                            github: "https://github.com",
+                            twitter: "https://twitter.com",
+                            linkedin: "https://linkedin.com",
+                        }}
+                    />
+                </section>
+
+                {/* Share Buttons Demo */}
+                <section>
+                    <h2 className="text-2xl font-semibold mb-6">Share Buttons Component</h2>
+                    <div className="space-y-6">
+                        <div className="border p-6 rounded-xl flex items-center justify-between">
+                            <span>수평 레이아웃 (Horizontal)</span>
+                            <ShareButtons orientation="horizontal" />
+                        </div>
+                        <div className="border p-6 rounded-xl flex items-center justify-between">
+                            <span>수직 레이아웃 (Vertical)</span>
+                            <ShareButtons orientation="vertical" />
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            {/* TOC Demo */}
+            <section className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div className="md:col-span-2 space-y-4">
+                    <h2 className="text-2xl font-semibold mb-6">Table of Contents Demo</h2>
+                    <div className="prose dark:prose-invert max-w-none border p-8 rounded-xl h-[300px] overflow-y-auto">
+                        <h3>본문 예시 영역</h3>
+                        <p>우측에 있는 목차 컴포넌트는 실제 글의 헤딩 태그를 추적하여 현재 읽고 있는 위치를 표시해줍니다.</p>
+                        <p>현재는 데모 상태이므로 정적인 데이터로 렌더링되고 있습니다.</p>
+                        <div className="h-64 bg-muted/20 rounded mt-4 flex items-center justify-center text-muted-foreground">
+                            Scrollable Content Placeholder
+                        </div>
+                    </div>
+                </div>
+                <div className="border p-6 rounded-xl h-fit">
+                    <TableOfContents />
+                </div>
+            </section>
+
+            {/* Post Navigation Demo */}
+            <section>
+                <h2 className="text-2xl font-semibold mb-6">Post Navigation Component</h2>
+                <div className="space-y-8">
+                    <div className="space-y-2">
+                        <h3 className="text-lg font-medium text-muted-foreground">Full (Prev & Next)</h3>
+                        <div className="border rounded-xl p-8 bg-background">
+                            <PostNavigation
+                                prevPost={{
+                                    title: "TypeScript 5.0의 새로운 기능들을 깊이 있게 살펴보기",
+                                    href: "#"
+                                }}
+                                nextPost={{
+                                    title: "React Server Components와 Next.js 14 도입 가이드",
+                                    href: "#"
+                                }}
+                            />
+                        </div>
+                    </div>
+
+                    <div className="space-y-2">
+                        <h3 className="text-lg font-medium text-muted-foreground">First Post (Next Only)</h3>
+                        <div className="border rounded-xl p-8 bg-background">
+                            <PostNavigation
+                                nextPost={{
+                                    title: "웹 접근성을 고려한 UI 디자인 패턴",
+                                    href: "#"
+                                }}
+                            />
+                        </div>
+                    </div>
+
+                    <div className="space-y-2">
+                        <h3 className="text-lg font-medium text-muted-foreground">Last Post (Prev Only)</h3>
+                        <div className="border rounded-xl p-8 bg-background">
+                            <PostNavigation
+                                prevPost={{
+                                    title: "효과적인 상태 관리를 위한 Zustand 사용법",
+                                    href: "#"
+                                }}
+                            />
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            {/* Admin Components Demo */}
+            <section className="container mx-auto px-4 py-8 border-t space-y-8 bg-muted/20">
+                <div className="space-y-4">
+                    <h2 className="text-2xl font-bold">Admin Form Components</h2>
+                    <p className="text-muted-foreground">어드민 페이지에서 사용되는 공통 헤더 및 섹션 컴포넌트입니다.</p>
+                </div>
+
+                <div className="space-y-8 bg-background p-6 rounded-lg border">
+                    {/* AdminPageHeader Demo */}
+                    <div className="space-y-4">
+                        <Badge>Header with Actions</Badge>
+                        <AdminPageHeader
+                            title="Edit User Profile"
+                            description="Update user information and permissions."
+                            backLink="#"
+                            actions={
+                                <>
+                                    <Button variant="outline">Cancel</Button>
+                                    <Button>Save Changes</Button>
+                                </>
+                            }
+                        />
+                    </div>
+
+                    {/* AdminSection Demo */}
+                    <div className="space-y-4">
+                        <Badge>Form Section Card</Badge>
+                        <AdminSection
+                            title="Basic Information"
+                            description="Enter the user's basic profile details."
+                        >
+                            <div className="grid gap-4">
+                                <div className="space-y-2">
+                                    <Label>Full Name</Label>
+                                    <Input placeholder="John Doe" />
+                                </div>
+                                <div className="space-y-2">
+                                    <Label>Email Address</Label>
+                                    <Input placeholder="john@example.com" />
+                                </div>
+                            </div>
+                        </AdminSection>
+                    </div>
                 </div>
             </section>
         </div>
