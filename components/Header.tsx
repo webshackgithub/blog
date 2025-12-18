@@ -32,9 +32,11 @@ export function Header() {
                 {/* Actions */}
                 <div className="flex items-center gap-4">
                     <ModeToggle />
-                    <Button variant="ghost" size="sm">
-                        로그인
-                    </Button>
+                    <Link href="/login">
+                        <Button variant="ghost" size="sm">
+                            로그인
+                        </Button>
+                    </Link>
                 </div>
             </div>
         </header>
