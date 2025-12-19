@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { ModeToggle } from "@/components/ModeToggle";
+import AuthButtons from "@/components/auth/auth-buttons";
 
 export function Header() {
     return (
@@ -32,11 +33,7 @@ export function Header() {
                 {/* Actions */}
                 <div className="flex items-center gap-4">
                     <ModeToggle />
-                    <Link href="/login">
-                        <Button variant="ghost" size="sm">
-                            로그인
-                        </Button>
-                    </Link>
+                    <AuthButtons />
                 </div>
             </div>
         </header>
