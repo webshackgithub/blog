@@ -13,7 +13,6 @@ import {
 import { PostHeader } from "@/components/blog/PostHeader";
 import { AuthorBio } from "@/components/blog/AuthorBio";
 import { ShareButtons } from "@/components/blog/ShareButtons";
-import { TableOfContents } from "@/components/blog/TableOfContents";
 import { PostNavigation } from "@/components/blog/PostNavigation";
 import { Badge } from "@/components/ui/badge";
 import { AdminPageHeader } from "@/components/admin/AdminPageHeader";
@@ -195,23 +194,7 @@ export default function ComponentsDemoPage() {
                 </section>
             </div>
 
-            {/* TOC Demo */}
-            <section className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div className="md:col-span-2 space-y-4">
-                    <h2 className="text-2xl font-semibold mb-6">Table of Contents Demo</h2>
-                    <div className="prose dark:prose-invert max-w-none border p-8 rounded-xl h-[300px] overflow-y-auto">
-                        <h3>본문 예시 영역</h3>
-                        <p>우측에 있는 목차 컴포넌트는 실제 글의 헤딩 태그를 추적하여 현재 읽고 있는 위치를 표시해줍니다.</p>
-                        <p>현재는 데모 상태이므로 정적인 데이터로 렌더링되고 있습니다.</p>
-                        <div className="h-64 bg-muted/20 rounded mt-4 flex items-center justify-center text-muted-foreground">
-                            Scrollable Content Placeholder
-                        </div>
-                    </div>
-                </div>
-                <div className="border p-6 rounded-xl h-fit">
-                    <TableOfContents />
-                </div>
-            </section>
+            {/* TOC Demo Removed */}
 
             {/* Post Navigation Demo */}
             <section>

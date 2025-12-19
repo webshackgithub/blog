@@ -13,10 +13,12 @@ import {
     SelectTrigger,
     SelectValue,
 } from "@/components/ui/select";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ArrowLeft, Save, Loader2, Image as ImageIcon } from "lucide-react";
 import { updatePost, ActionState } from "../actions";
 import { AdminPageHeader } from "@/components/admin/AdminPageHeader";
 import { AdminSection } from "@/components/admin/AdminSection";
+import ReactMarkdown from "react-markdown";
 
 // DB에서 불러온 Post 타입 정의 (Supabase 타입 생성 전 임시 정의)
 type Post = {
@@ -45,6 +47,8 @@ export default function EditPostForm({ initialPost }: { initialPost: Post }) {
     const [category, setCategory] = useState(initialPost.category || "");
     // Thumbnail URL 상태 관리
     const [thumbnailUrl, setThumbnailUrl] = useState(initialPost.thumbnail_url || "");
+    // Content 상태 관리 for Preview
+    const [content, setContent] = useState(initialPost.content || "");
 
     return (
         <form action={action} className="space-y-6 max-w-5xl mx-auto pb-10" suppressHydrationWarning>
@@ -108,15 +112,35 @@ export default function EditPostForm({ initialPost }: { initialPost: Post }) {
                                 {state.errors?.slug && <p className="text-sm text-red-500">{state.errors.slug[0]}</p>}
                             </div>
 
-                            <div className="space-y-2 h-[500px]">
-                                <Label htmlFor="content">Content (Markdown)</Label>
-                                <Textarea
-                                    id="content"
-                                    name="content"
-                                    className="h-full font-mono resize-none leading-relaxed p-4"
-                                    defaultValue={initialPost.content || ""}
-                                    required
-                                />
+                            <div className="space-y-2">
+                                <Tabs defaultValue="edit" className="w-full">
+                                    <div className="flex items-center justify-between mb-2">
+                                        <Label htmlFor="content">Content (Markdown)</Label>
+                                        <TabsList>
+                                            <TabsTrigger value="edit">Edit</TabsTrigger>
+                                            <TabsTrigger value="preview">Preview</TabsTrigger>
+                                        </TabsList>
+                                    </div>
+
+                                    <TabsContent value="edit" className="h-[500px]">
+                                        <Textarea
+                                            id="content"
+                                            name="content"
+                                            className="h-full font-mono resize-none leading-relaxed p-4"
+                                            value={content}
+                                            onChange={(e) => setContent(e.target.value)}
+                                            required
+                                        />
+                                    </TabsContent>
+
+                                    <TabsContent value="preview" className="h-[500px] overflow-y-auto border rounded-md p-6 bg-card">
+                                        <div className="prose dark:prose-invert max-w-none">
+                                            <ReactMarkdown>
+                                                {content || "*No content to preview*"}
+                                            </ReactMarkdown>
+                                        </div>
+                                    </TabsContent>
+                                </Tabs>
                                 {state.errors?.content && <p className="text-sm text-red-500">{state.errors.content[0]}</p>}
                             </div>
                         </div>
