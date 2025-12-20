@@ -13,14 +13,26 @@ import { Badge } from "@/components/ui/badge";
 import { Plus, Pencil, Trash2, Image as ImageIcon } from "lucide-react";
 import { createClient } from "@/utils/supabase/server";
 
-export default async function PostsPage() {
+export default async function PostsPage({
+    searchParams,
+}: {
+    searchParams: Promise<{ status?: string }>;
+}) {
+    const { status } = await searchParams;
     const supabase = await createClient();
 
     // Supabase에서 포스트 목록 조회 (최신순 정렬)
-    const { data: posts, error } = await supabase
+    let query = supabase
         .from('posts')
         .select('*')
         .order('created_at', { ascending: false });
+
+    // 상태 필터링 적용
+    if (status) {
+        query = query.eq('status', status);
+    }
+
+    const { data: posts, error } = await query;
 
     if (error) {
         console.error("Error fetching posts:", error);

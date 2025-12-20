@@ -11,7 +11,65 @@ import { notFound } from "next/navigation";
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import rehypeHighlight from 'rehype-highlight';
-import 'highlight.js/styles/github-dark.css'; // 코드 하이라이팅 스타일 추가
+import rehypeSlug from 'rehype-slug';
+import 'highlight.js/styles/github-dark.css';
+import { TableOfContents } from "@/components/blog/TableOfContents";
+
+// 보다 견고한 Slug 생성 함수 (rehype-slug 및 github-slugger 대응)
+function slugify(text: string) {
+    return text
+        .toLowerCase()
+        .trim()
+        .replace(/\s+/g, '-')
+        .replace(/[^\w\-\uac00-\ud7af]/g, '') // 한글 및 영문, 숫자, 하이픈만 허용
+        .replace(/-+/g, '-')
+        .replace(/^-+/, '')
+        .replace(/-+$/, '');
+}
+
+function extractHeadings(markdown: string) {
+    // 줄바꿈 처리 보강 (이스케이프된 줄바꿈 및 캐리지 리턴 처리)
+    const sanitizedMarkdown = markdown
+        .replace(/\\r\\n/g, '\n')
+        .replace(/\\n/g, '\n')
+        .replace(/\r\n/g, '\n');
+
+    const lines = sanitizedMarkdown.split('\n');
+    const headings: { id: string; text: string; level: number }[] = [];
+
+    let inCodeBlock = false;
+
+    for (const line of lines) {
+        const trimmedLine = line.trim();
+
+        if (trimmedLine.startsWith('```')) {
+            inCodeBlock = !inCodeBlock;
+            continue;
+        }
+
+        if (!inCodeBlock) {
+            const match = trimmedLine.match(/^(#{2,3})\s+(.+)$/);
+            if (match) {
+                const level = match[1].length;
+                const text = match[2].replace(/[*_~`]/g, '').trim();
+                const id = slugify(text);
+
+                if (id) {
+                    headings.push({
+                        id: id,
+                        text: text,
+                        level: level,
+                    });
+                }
+            }
+        }
+    }
+
+    // 서버 사이드 로그 (디버깅용)
+    console.log(`[TOC Debug] Extracted ${headings.length} headings:`, headings.map(h => h.id));
+
+    return headings;
+}
 
 interface Props {
     params: Promise<{ slug: string }>;
@@ -71,6 +129,8 @@ export default async function BlogDetailPage({ params }: Props) {
         }
     };
 
+    const headings = extractHeadings(post.content || "");
+
     return (
         <div className="flex min-h-screen flex-col">
             <Header />
@@ -94,7 +154,7 @@ export default async function BlogDetailPage({ params }: Props) {
                                 <div className="prose dark:prose-invert max-w-none prose-pre:bg-zinc-900 prose-pre:border prose-pre:border-zinc-800">
                                     <ReactMarkdown
                                         remarkPlugins={[remarkGfm]}
-                                        rehypePlugins={[rehypeHighlight]}
+                                        rehypePlugins={[rehypeHighlight, rehypeSlug]}
                                     >
                                         {(post.content || "").replace(/\\r\\n/g, '\n').replace(/\\n/g, '\n')}
                                     </ReactMarkdown>
@@ -131,8 +191,10 @@ export default async function BlogDetailPage({ params }: Props) {
 
 
                         <div className="hidden lg:block lg:col-span-3 space-y-8 sticky top-24 h-fit">
-                            <div className="space-y-4">
-                                <span className="text-sm font-medium text-muted-foreground">공유하기</span>
+                            {/* 목차 */}
+                            <TableOfContents headings={headings} />
+
+                            <div className="space-y-4 pt-8 border-t">
                                 <ShareButtons orientation="vertical" />
                             </div>
                         </div>
